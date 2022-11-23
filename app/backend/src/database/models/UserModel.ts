@@ -1,18 +1,45 @@
-import { Model } from 'sequelize';
+import { STRING, INTEGER, Model } from 'sequelize';
 import db from '.';
 // import OtherModel from './OtherModel';
 
-class Example extends Model {
+class User extends Model {
   // declare <campo>: <tipo>;
+  declare id: number;
+  declare username: string;
+  declare role: string;
+  declare email: string;
+  declare password: string;
 }
 
-Example.init({
+User.init({
   // ... Campos
+  id: {
+    type: INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  username: {
+    type: STRING(50),
+    allowNull: false,
+  },
+  role: {
+    type: STRING(20),
+    allowNull: false,
+  },
+  email: {
+    type: STRING(40),
+    allowNull: false,
+  },
+  password: {
+    type: STRING(40),
+    allowNull: false,
+  },
 }, {
   // ... Outras configs
   underscored: true,
   sequelize: db,
-  // modelName: 'example',
+  modelName: 'user',
   timestamps: false,
 });
 
@@ -27,4 +54,4 @@ Example.init({
 // Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 
-export default Example;
+export default User;
