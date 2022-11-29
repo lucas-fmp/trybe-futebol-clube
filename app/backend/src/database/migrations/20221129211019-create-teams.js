@@ -12,6 +12,7 @@ module.exports = {
       team_name: {
         type: Sequelize.STRING(100),
         allowNull: false,
+        field: 'team_name'
       },
     })
   },
