@@ -1,5 +1,8 @@
 import express from 'express';
+import 'express-async-errors';
+import cors from 'cors';
 import routes from './routes/router';
+import handleError from './middlewares/error.middleware';
 
 class App {
   public app: express.Express;
@@ -8,10 +11,9 @@ class App {
     this.app = express();
 
     this.config();
-    this.app.use(routes);
 
     // Não remover essa rota
-    this.app.get('/', (req, res) => res.json({ ok: true }));
+    this.app.get('/', (_req, res) => res.json({ ok: true }));
   }
 
   private config():void {
@@ -22,8 +24,11 @@ class App {
       next();
     };
 
+    this.app.use(cors());
     this.app.use(express.json());
     this.app.use(accessControl);
+    this.app.use(routes);
+    this.app.use(handleError);
   }
 
   public start(PORT: string | number):void {
