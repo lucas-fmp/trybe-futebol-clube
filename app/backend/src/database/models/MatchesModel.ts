@@ -6,10 +6,11 @@ import TeamModel from './TeamModel';
 class Match extends Model {
   // declare <campo>: <tipo>;
   declare id: number;
-  declare username: string;
-  declare role: string;
-  declare email: string;
-  declare password: string;
+  declare homeTeam: number;
+  declare homeTeamGoals: number;
+  declare awayTeam: number;
+  declare awayTeamGoals: number;
+  declare inProgress: boolean;
 }
 
 Match.init({
@@ -56,24 +57,19 @@ Match.init({
 // OtherModel.belongsTo(Example, { foreignKey: 'campoA', as: 'campoEstrangeiroA' });
 // OtherModel.belongsTo(Example, { foreignKey: 'campoB', as: 'campoEstrangeiroB' });
 Match.belongsTo(TeamModel, {
-  foreignKey: 'home_team',
-  as: 'teams',
+  foreignKey: 'homeTeam',
+  as: 'teamHome',
 });
 
 Match.belongsTo(TeamModel, {
-  foreignKey: 'away_team',
-  as: 'teams',
+  foreignKey: 'awayTeam',
+  as: 'teamAway',
 });
 
 // Example.hasMany(OtherModel, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
 // Example.hasMany(OtherModel, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
 TeamModel.hasMany(Match, {
-  foreignKey: 'home_team',
-  as: 'matches',
-});
-
-TeamModel.hasMany(Match, {
-  foreignKey: 'away_team',
+  foreignKey: 'id',
   as: 'matches',
 });
 
