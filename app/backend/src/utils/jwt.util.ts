@@ -12,7 +12,7 @@ const validateToken = (token: string) => {
   try {
     jwt.verify(token, process.env.JWT_SECRET as string);
   } catch (_e) {
-    throw new CustomError(401, 'Expired or invalid token');
+    throw new CustomError(401, 'Token must be a valid token');
   }
 };
 
