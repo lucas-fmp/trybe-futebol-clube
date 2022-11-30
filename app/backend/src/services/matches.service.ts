@@ -60,7 +60,7 @@ export default class MatchesService {
     return result;
   }
 
-  public static async updateMatch(id: string) {
+  public static async updateMatchStatus(id: string) {
     const match = await Matches.findOne({ where: { id } });
 
     if (!match) {
@@ -68,5 +68,18 @@ export default class MatchesService {
     }
 
     await match.update({ inProgress: false });
+  }
+
+  public static async updateMatchGoals(id: string, homeTeamGoals: number, awayTeamGoals: number) {
+    const match = await Matches.findOne({ where: { id } });
+
+    if (!match) {
+      throw new CustomError(404, 'Match not found');
+    }
+
+    await match.update({
+      homeTeamGoals,
+      awayTeamGoals,
+    });
   }
 }

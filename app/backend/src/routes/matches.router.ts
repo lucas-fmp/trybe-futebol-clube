@@ -9,6 +9,7 @@ router.get('/', MatchesController.getMatches);
 router.use(validateTokenMiddleware);
 
 router.post('/', MatchesController.newMatch);
+router.patch('/:id', MatchesController.updateMatch);
 router.patch('/:id/finish', MatchesController.finishMatch);
 
 export default router;

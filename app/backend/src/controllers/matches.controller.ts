@@ -27,9 +27,18 @@ class MatchesController {
   public static async finishMatch(req: Request, res: Response): Promise<Response> {
     const { id } = req.params;
 
-    await MatchesService.updateMatch(id);
+    await MatchesService.updateMatchStatus(id);
 
     return res.status(200).json({ message: 'Finished' });
+  }
+
+  public static async updateMatch(req: Request, res: Response): Promise<Response> {
+    const { id } = req.params;
+    const { homeTeamGoals, awayTeamGoals } = req.body;
+
+    await MatchesService.updateMatchGoals(id, homeTeamGoals, awayTeamGoals);
+
+    return res.status(200).json({ message: 'Updated' });
   }
 }
 
