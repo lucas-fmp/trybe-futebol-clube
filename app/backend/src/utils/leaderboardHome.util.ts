@@ -2,7 +2,7 @@ import { ITeam } from '../interfaces/ITeams';
 import { ILeaderboardObj } from '../interfaces/ILeaderboard';
 import { IMatchWithTeams } from '../interfaces/IMatches';
 
-const totalPoints = (matches: IMatchWithTeams[]) => {
+const totalPointsHome = (matches: IMatchWithTeams[]) => {
   let points = 0;
 
   matches.forEach((match) => {
@@ -17,9 +17,9 @@ const totalPoints = (matches: IMatchWithTeams[]) => {
   return points;
 };
 
-const totalGames = (matches: IMatchWithTeams[]) => matches.length;
+const totalGamesHome = (matches: IMatchWithTeams[]) => matches.length;
 
-const totalVictories = (matches: IMatchWithTeams[]) => {
+const totalVictoriesHome = (matches: IMatchWithTeams[]) => {
   let victories = 0;
 
   matches.forEach((match) => {
@@ -31,7 +31,7 @@ const totalVictories = (matches: IMatchWithTeams[]) => {
   return victories;
 };
 
-const totalDraws = (matches: IMatchWithTeams[]) => {
+const totalDrawsHome = (matches: IMatchWithTeams[]) => {
   let draws = 0;
 
   matches.forEach((match) => {
@@ -43,7 +43,7 @@ const totalDraws = (matches: IMatchWithTeams[]) => {
   return draws;
 };
 
-const totalLosses = (matches: IMatchWithTeams[]) => {
+const totalLossesHome = (matches: IMatchWithTeams[]) => {
   let losses = 0;
 
   matches.forEach((match) => {
@@ -55,7 +55,7 @@ const totalLosses = (matches: IMatchWithTeams[]) => {
   return losses;
 };
 
-const goalsFavor = (matches: IMatchWithTeams[]) => {
+const goalsFavorHome = (matches: IMatchWithTeams[]) => {
   let goals = 0;
 
   matches.forEach((match) => {
@@ -65,7 +65,7 @@ const goalsFavor = (matches: IMatchWithTeams[]) => {
   return goals;
 };
 
-const goalsOwn = (matches: IMatchWithTeams[]) => {
+const goalsOwnHome = (matches: IMatchWithTeams[]) => {
   let goals = 0;
 
   matches.forEach((match) => {
@@ -75,7 +75,7 @@ const goalsOwn = (matches: IMatchWithTeams[]) => {
   return goals;
 };
 
-const goalsBalance = (matches: IMatchWithTeams[]) => {
+const goalsBalanceHome = (matches: IMatchWithTeams[]) => {
   let goals = 0;
 
   matches.forEach((match) => {
@@ -86,11 +86,11 @@ const goalsBalance = (matches: IMatchWithTeams[]) => {
   return goals;
 };
 
-const efficiency = (matches: IMatchWithTeams[]) => {
-  const points = totalPoints(matches);
-  const games = totalGames(matches);
+const efficiencyHome = (matches: IMatchWithTeams[]) => {
+  const points = totalPointsHome(matches);
+  const games = totalGamesHome(matches);
 
-  const result = (((points / (games * 3)) * 100).toFixed(2)).toString();
+  const result = ((points / (games * 3)) * 100).toFixed(2).toString();
 
   return result;
 };
@@ -103,15 +103,15 @@ const createLeaderboardHome = (teams: ITeam[], matches: IMatchWithTeams[]) => {
     const filteredMatches = matches.filter((match) => match.teamHome.teamName === teamName);
     leaderboard.push({
       name: teamName,
-      totalPoints: totalPoints(filteredMatches),
-      totalGames: totalGames(filteredMatches),
-      totalVictories: totalVictories(filteredMatches),
-      totalDraws: totalDraws(filteredMatches),
-      totalLosses: totalLosses(filteredMatches),
-      goalsFavor: goalsFavor(filteredMatches),
-      goalsOwn: goalsOwn(filteredMatches),
-      goalsBalance: goalsBalance(filteredMatches),
-      efficiency: efficiency(filteredMatches),
+      totalPoints: totalPointsHome(filteredMatches),
+      totalGames: totalGamesHome(filteredMatches),
+      totalVictories: totalVictoriesHome(filteredMatches),
+      totalDraws: totalDrawsHome(filteredMatches),
+      totalLosses: totalLossesHome(filteredMatches),
+      goalsFavor: goalsFavorHome(filteredMatches),
+      goalsOwn: goalsOwnHome(filteredMatches),
+      goalsBalance: goalsBalanceHome(filteredMatches),
+      efficiency: efficiencyHome(filteredMatches),
     });
   });
 
@@ -119,3 +119,14 @@ const createLeaderboardHome = (teams: ITeam[], matches: IMatchWithTeams[]) => {
 };
 
 export default createLeaderboardHome;
+
+export {
+  totalPointsHome,
+  totalGamesHome,
+  totalVictoriesHome,
+  totalDrawsHome,
+  totalLossesHome,
+  goalsFavorHome,
+  goalsOwnHome,
+  goalsBalanceHome,
+};
