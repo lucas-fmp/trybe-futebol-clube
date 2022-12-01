@@ -7,6 +7,12 @@ class LeaderboardController {
 
     return res.status(200).json(leaderboard);
   }
+
+  public static async getLeaderboardAway(_req: Request, res: Response): Promise<Response> {
+    const leaderboard = await LeaderboardService.getLeaderboardAway();
+
+    return res.status(200).json(leaderboard);
+  }
 }
 
 export default LeaderboardController;
