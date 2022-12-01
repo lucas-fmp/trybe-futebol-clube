@@ -8,3 +8,14 @@ export interface IMatchWithoutStatus {
 export interface IMatch extends IMatchWithoutStatus {
   inProgress: boolean;
 }
+
+export interface IMatchWithTeams extends IMatch {
+  teamHome: {
+    id: string;
+    teamName: string;
+  }
+  teamAway: {
+    id: string;
+    teamName: string;
+  }
+}
